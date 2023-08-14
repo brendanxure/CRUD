@@ -36,11 +36,12 @@ const Register = async(req, res)=> {
     }
 }
 
+
 // login a user
 
 const Login = async(req, res)=> {
     if (!req.body.email || !req.body.password) {
-        res.json('Please fill input completely')
+        res.status(400).json('Please fill input completely')
     }
 
     const useremail = await User.findOne({email: req.body.email})
@@ -53,9 +54,10 @@ const Login = async(req, res)=> {
     if (useremail && userpass) {
         // res.json( `${useremail.name} is logged in`)
         res.json({
+            name: useremail.name,
             email: useremail.email,
             password: useremail.password,
-            token: generateToken(useremail._id)
+            token: generateToken(useremail._id),
         })
     } else {
         res.json(`incorret password`)

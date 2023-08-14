@@ -21,10 +21,12 @@ const postxure = async (req, res) => {
 const putxure = async (req, res) => {
     const bxid = await bxureSchema.findById(req.params.id)
     if (!bxid) {
-        res.json("No name found")
+        res.json("No post found")
     }
 
     const eachUser = await User.findById(req.user.id)
+
+    // you can do away with eachuser and use the req.user in the authmiddle
     if(!eachUser) {
         res.status(400).json('No User Found')
     }
@@ -40,7 +42,7 @@ const putxure = async (req, res) => {
 const delxure = async (req, res) =>{
     const bxid = await bxureSchema.findById(req.params.id)
     if (!bxid) {
-        res.json("No name found")
+        res.json("No post found")
     }
 
     const eachUser = await User.findById(req.user.id)

@@ -2,6 +2,7 @@ const express = require('express')
 const dotenv = require('dotenv').config()
 const port = process.env.PORT
 const DBConnect = require('../Config/Db')
+const cors = require('cors')
 
 const app = express()
 
@@ -9,6 +10,7 @@ DBConnect()
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+app.use(cors());
 
 app.use(('/xure'), require('../Route/Route'))
 app.use(('/user'), require('../Route/Userroute'))
